@@ -13,5 +13,13 @@ namespace EmpoyeeWageProblemDay8
             this.numberOfWorkingDays = numberOfWorkingDays;
             this.maxHrsInMonth = maxHrsInMonth;
         }
+        public void PrintOutPutOfEmp(Employee empObject)
+        {
+            var calculateEmpWage = new EmployeeDailyWage();
+            var empDetails = calculateEmpWage.CalculateEmployeeDailyWage(empObject);
+            Console.WriteLine("Total Working Days: " + empDetails.TotalWorkingDays);
+            Console.WriteLine("Total Working Hours: " + empDetails.TotalEmpHour);
+            Console.WriteLine("Total Employee Wage : " + empDetails.TotalEmpWage);
+        }
     }
 }
