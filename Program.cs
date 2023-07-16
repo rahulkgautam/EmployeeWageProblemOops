@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmpoyeeWageProblemDay8
 {
@@ -8,7 +6,11 @@ namespace EmpoyeeWageProblemDay8
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To Employee Wage Problem");
+            var employee = new EmployeeDailyWage();
+            Console.WriteLine("Welcome Employee Wage Problem using oops");
+            employee.AddEmployeeObject(20,20,100);
+            employee.AddEmployeeObject(70, 31, 180);
+
         }
     }
 }
