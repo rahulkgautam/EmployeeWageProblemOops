@@ -8,11 +8,11 @@ namespace EmpoyeeWageProblemDay8
     {
         public EmployeeModel employeeModels;
         int numberOfEmp = 1;
-        public void AddEmployeeObject(int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
+        public void AddEmployee(string companyName,int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
         {
-            var empObject = new Employee(empRatePerHrs,numberOfWorkingDays,maxHrsInMonth);
-            Console.WriteLine("========Added Employee===== {0}", numberOfEmp);
-            empObject.PrintOutPutOfEmp(empObject);
+            var empObject = new Employee(companyName,empRatePerHrs, numberOfWorkingDays,maxHrsInMonth);
+            Console.WriteLine("========Employee Added===== {0}", numberOfEmp);
+            empObject.PrintEmployeeDetails(empObject);
             numberOfEmp++;
         }
         public EmployeeModel CalculateEmployeeDailyWage(Employee employee)
@@ -43,6 +43,7 @@ namespace EmpoyeeWageProblemDay8
                     totalEmpWage += empWage;
                 }
             }
+            employeeModels.CompanyName = employee.companyName;
             employeeModels.TotalWorkingDays= totalWorkingDays;
             employeeModels.TotalEmpWage = totalEmpWage;
             employeeModels.TotalEmpHour = totalEmpHour;

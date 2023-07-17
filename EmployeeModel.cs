@@ -6,6 +6,7 @@ namespace EmpoyeeWageProblemDay8
 {
     class EmployeeModel
     {
+        public string CompanyName { get; set; }
         public int TotalWorkingDays { get; set; }
         public int TotalEmpHour { get; set; }
         public int TotalEmpWage { get; set; }
