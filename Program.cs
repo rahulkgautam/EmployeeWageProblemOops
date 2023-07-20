@@ -8,11 +8,9 @@ namespace EmpoyeeWageProblemDay8
         {
            
             Console.WriteLine("Welcome Employee Wage Problem using oops");
-            var google = new EmployeeWageBuilder("Google", 20, 20, 100);
-            google.PrintEmployeeDetails();
-
-            var microsoft = new EmployeeWageBuilder("Microsoft", 30, 30, 25);
-            microsoft.PrintEmployeeDetails();
+            var company = new EmployeeWageBuilder();
+            company.AddCompanyObjectIntoArray("Google", 20, 20, 100);
+            company.AddCompanyObjectIntoArray("Microsoft", 30, 30, 25);
             //employee.AddEmployee("Microsoft",30, 30, 25);
             //employee.AddEmployee("BridgeLab", 70, 31, 180);
 
