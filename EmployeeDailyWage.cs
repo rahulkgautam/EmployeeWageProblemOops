@@ -7,20 +7,12 @@ namespace EmpoyeeWageProblemDay8
     class EmployeeDailyWage
     {
         public EmployeeModel employeeModels;
-        int numberOfEmp = 1;
-        public void AddEmployee(string companyName,int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
-        {
-            var empObject = new Employee(companyName,empRatePerHrs, numberOfWorkingDays,maxHrsInMonth);
-            Console.WriteLine("========Employee Added===== {0}", numberOfEmp);
-            empObject.PrintEmployeeDetails(empObject);
-            numberOfEmp++;
-        }
-        public EmployeeModel CalculateEmployeeDailyWage(Employee employee)
+        public EmployeeModel CalculateEmployeeDailyWage(string company, int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
         {
             employeeModels = new EmployeeModel();
             int totalWorkingDays = 0, totalWorkingHrs = 0, empHour = 0,empWage = 0,totalEmpWage = 0,totalEmpHour = 0;
             Random rdm = new Random();
-            while (totalWorkingDays <employee.numberOfWorkingDays&& totalWorkingHrs< employee.maxHrsInMonth)
+            while (totalWorkingDays <numberOfWorkingDays&& totalWorkingHrs< maxHrsInMonth)
             {
                 totalWorkingDays++;
                 int empCheck = rdm.Next(3);
@@ -36,14 +28,14 @@ namespace EmpoyeeWageProblemDay8
                         empHour = 0;
                         break;
                 }
-                if (employee.maxHrsInMonth > totalEmpHour)
+                if (maxHrsInMonth > totalEmpHour)
                 {
                     totalEmpHour += empHour;
-                    empWage = empHour * employee.empRatePerHrs;
+                    empWage = empHour * empRatePerHrs;
                     totalEmpWage += empWage;
                 }
             }
-            employeeModels.CompanyName = employee.companyName;
+            employeeModels.CompanyName = company;
             employeeModels.TotalWorkingDays= totalWorkingDays;
             employeeModels.TotalEmpWage = totalEmpWage;
             employeeModels.TotalEmpHour = totalEmpHour;
