@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmpoyeeWageProblemDay8
 {
-    class CompanyEmpWage
+    class CompanyEmpWage:ICompany
     {
         
         public string companyName;
