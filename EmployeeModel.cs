@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmpoyeeWageProblemDay8
 {
-    class EmployeeModel
+    public class EmployeeModel
     {
         public string CompanyName { get; set; }
         public int TotalWorkingDays { get; set; }

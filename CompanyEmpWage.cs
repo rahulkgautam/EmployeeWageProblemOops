@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmpoyeeWageProblemDay8
 {
-    class CompanyEmpWage:ICompany
+    public class CompanyEmpWage
     {
         
         public string companyName;
@@ -16,15 +16,6 @@ namespace EmpoyeeWageProblemDay8
             this.numberOfWorkingDays = numberOfWorkingDays;
             this.maxHrsInMonth = maxHrsInMonth;
         }
-        
-        public void PrintEmployeeDetails()
-        {
-            var calculateEmpWage = new EmployeeWageBuilder();
-            var empDetails = calculateEmpWage.CalculateEmployeeDailyWage(companyName, empRatePerHrs,numberOfWorkingDays,maxHrsInMonth);
-            Console.WriteLine("Company Name : " + empDetails.CompanyName);
-            Console.WriteLine("Total Working Days: " + empDetails.TotalWorkingDays);
-            Console.WriteLine("Total Working Hours: " + empDetails.TotalEmpHour);
-            Console.WriteLine("Total Employee Wage : " + empDetails.TotalEmpWage);
-        }
+       
     }
 }

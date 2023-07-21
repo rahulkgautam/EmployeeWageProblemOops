@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,28 +8,37 @@ namespace EmpoyeeWageProblemDay8
     class EmployeeWageBuilder
     {
         public EmployeeModel employeeModels;
-        public CompanyEmpWage[] companies;
+        public List<CompanyEmpWage> listOfCompanies;
         public int numberOfCompany = 0;
 
         public EmployeeWageBuilder()
         {
-            this.companies = new CompanyEmpWage[5];
+            listOfCompanies = new List<CompanyEmpWage>();
         }
-        public void AddCompanyObjectIntoArray(string company, int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
+        public void IterateOverList()
+        {
+            foreach (var comp in listOfCompanies)
+            {
+                if (comp != null)
+                {
+                    var totalWage = CalculateEmployeeDailyWage(comp);
+                    PrintEmployeeDetails(totalWage);
+                }
+            }
+        }
+        public void AddCompanyObjectIntoList(string company, int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
         {
             var obj = new CompanyEmpWage(company, empRatePerHrs, numberOfWorkingDays, maxHrsInMonth);
-            companies[numberOfCompany] = obj;
-            numberOfCompany++;
-            Console.WriteLine("+++++++++++++=================+++++++++++++");
-            obj.PrintEmployeeDetails();
+            listOfCompanies.Add(obj);
+            //obj.PrintEmployeeDetails();
             //CalculateEmployeeDailyWage(obj);
         }
-        public EmployeeModel CalculateEmployeeDailyWage(string company, int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
+        public EmployeeModel CalculateEmployeeDailyWage(CompanyEmpWage company)
         {
             employeeModels = new EmployeeModel();
             int totalWorkingDays = 0, totalWorkingHrs = 0, empHour = 0,empWage = 0,totalEmpWage = 0,totalEmpHour = 0;
             Random rdm = new Random();
-            while (totalWorkingDays <numberOfWorkingDays&& totalWorkingHrs< maxHrsInMonth)
+            while (totalWorkingDays <company.numberOfWorkingDays&& totalWorkingHrs< company.maxHrsInMonth)
             {
                 totalWorkingDays++;
                 int empCheck = rdm.Next(3);
@@ -44,18 +54,26 @@ namespace EmpoyeeWageProblemDay8
                         empHour = 0;
                         break;
                 }
-                if (maxHrsInMonth > totalEmpHour)
+                if (company.maxHrsInMonth > totalEmpHour)
                 {
                     totalEmpHour += empHour;
-                    empWage = empHour * empRatePerHrs;
+                    empWage = empHour * company.empRatePerHrs;
                     totalEmpWage += empWage;
                 }
             }
-            employeeModels.CompanyName = company;
+            employeeModels.CompanyName =company.companyName;
             employeeModels.TotalWorkingDays= totalWorkingDays;
             employeeModels.TotalEmpWage = totalEmpWage;
             employeeModels.TotalEmpHour = totalEmpHour;
             return employeeModels;
+        }
+        public void PrintEmployeeDetails(EmployeeModel empDetails)
+        {
+            Console.WriteLine("+++++++++++++=================+++++++++++++");
+            Console.WriteLine("Company Name : " + empDetails.CompanyName);
+            Console.WriteLine("Total Working Days: " + empDetails.TotalWorkingDays);
+            Console.WriteLine("Total Working Hours: " + empDetails.TotalEmpHour);
+            Console.WriteLine("Total Employee Wage : " + empDetails.TotalEmpWage);
         }
     }
 }
