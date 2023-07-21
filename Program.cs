@@ -12,6 +12,9 @@ namespace EmpoyeeWageProblemDay8
             company.AddCompanyObjectIntoList("Google", 20, 20, 100);
             company.AddCompanyObjectIntoList("Microsoft", 30, 30, 25);
             company.IterateOverList();
+            var totalWage =company.GetTotalWage("Microsoft");
+            Console.WriteLine("Total Wage by Query :"+totalWage);
+            
             //employee.AddEmployee("Microsoft",30, 30, 25);
             //employee.AddEmployee("BridgeLab", 70, 31, 180);
 

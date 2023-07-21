@@ -10,7 +10,8 @@ namespace EmpoyeeWageProblemDay8
         //public Company[] companies;
         public List<Company> ListOfCompanies;
         public int numberOfCompany = 0;
-
+        const int IS_FULL_TIME = 1;
+        const int IS_PART_TIME = 2;
         public EmployeeWageBuilder()
         {
             //this.companies = new Company[5];
@@ -31,13 +32,10 @@ namespace EmpoyeeWageProblemDay8
                 if (comp != null)
                 {
                     int totalWage = CalculateEmployeeDailyWage(comp);
-                   // comp.SetTotalWage(totalWage);
+                   comp.SetTotalWage(totalWage);
                 }
             }
         }
-
-        const int IS_FULL_TIME = 1;
-        const int IS_PART_TIME = 2;
         public static int CalculateEmployeeDailyWage(Company company)
         {
             int empHour = 0, totalWorkingDays = 0, totalEmpWage = 0, totalEmpHour = 0, dailyEmpWage = 0;
@@ -64,7 +62,22 @@ namespace EmpoyeeWageProblemDay8
             }
             totalEmpWage = totalEmpHour * company.empRatePerHrs;
             Console.WriteLine("Daily Wage \nCompany Name :- " + company.companyName + " ,Total Emp Hrs " + totalEmpHour + " TotoEmpWage, " + totalEmpWage);
+            Console.WriteLine("++++++++=========================+++++++");
             return totalEmpWage;
+        }
+        public int GetTotalWage(string company)
+        {
+            foreach (Company comp in ListOfCompanies)
+            {
+                if (comp != null)
+                {
+                    if (company == comp.companyName)
+                    {
+                        return comp.totalWage;
+                    }
+                }
+            }
+            return 0;
         }
     }
 }

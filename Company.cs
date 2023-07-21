@@ -8,7 +8,7 @@ namespace EmpoyeeWageProblemDay8
     {
         
         public string companyName;
-        public int numberOfWorkingDays, maxHrsInMonth, empRatePerHrs;
+        public int numberOfWorkingDays, maxHrsInMonth, empRatePerHrs,totalWage;
         public Company(string company,int empRatePerHrs,int numberOfWorkingDays,int maxHrsInMonth)
         {
             this.companyName = company;
@@ -16,6 +16,16 @@ namespace EmpoyeeWageProblemDay8
             this.numberOfWorkingDays = numberOfWorkingDays;
             this.maxHrsInMonth = maxHrsInMonth;
         }
-       
+        public void SetTotalWage(int totalWage)
+        {
+            this.totalWage = totalWage;
+        }
+        public int GetTotalWage(string company)
+        {
+            if(companyName == company)
+            return totalWage;
+            return 0;
+        }
+
     }
 }
