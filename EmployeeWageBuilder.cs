@@ -7,73 +7,64 @@ namespace EmpoyeeWageProblemDay8
 {
     class EmployeeWageBuilder
     {
-        public EmployeeModel employeeModels;
-        public List<CompanyEmpWage> listOfCompanies;
+        //public Company[] companies;
+        public List<Company> ListOfCompanies;
         public int numberOfCompany = 0;
 
         public EmployeeWageBuilder()
         {
-            listOfCompanies = new List<CompanyEmpWage>();
+            //this.companies = new Company[5];
+            ListOfCompanies = new List<Company>();
+        }
+        public void AddCompanyObjectIntoList(string companyName, int numberOfWorkingDays, int maxWorkingHrs, int empRatePerHr)
+        {
+            Company obj = new Company(companyName, numberOfWorkingDays, maxWorkingHrs, empRatePerHr);
+            //companies[numberOfCompany] = obj;
+            ListOfCompanies.Add(obj);
+            // numberOfCompany++;
+            //CalculateEmployeeDailyWage(obj);
         }
         public void IterateOverList()
         {
-            foreach (var comp in listOfCompanies)
+            foreach (Company comp in ListOfCompanies)
             {
                 if (comp != null)
                 {
-                    var totalWage = CalculateEmployeeDailyWage(comp);
-                    PrintEmployeeDetails(totalWage);
+                    int totalWage = CalculateEmployeeDailyWage(comp);
+                   // comp.SetTotalWage(totalWage);
                 }
             }
         }
-        public void AddCompanyObjectIntoList(string company, int empRatePerHrs, int numberOfWorkingDays, int maxHrsInMonth)
+
+        const int IS_FULL_TIME = 1;
+        const int IS_PART_TIME = 2;
+        public static int CalculateEmployeeDailyWage(Company company)
         {
-            var obj = new CompanyEmpWage(company, empRatePerHrs, numberOfWorkingDays, maxHrsInMonth);
-            listOfCompanies.Add(obj);
-            //obj.PrintEmployeeDetails();
-            //CalculateEmployeeDailyWage(obj);
-        }
-        public EmployeeModel CalculateEmployeeDailyWage(CompanyEmpWage company)
-        {
-            employeeModels = new EmployeeModel();
-            int totalWorkingDays = 0, totalWorkingHrs = 0, empHour = 0,empWage = 0,totalEmpWage = 0,totalEmpHour = 0;
+            int empHour = 0, totalWorkingDays = 0, totalEmpWage = 0, totalEmpHour = 0, dailyEmpWage = 0;
             Random rdm = new Random();
-            while (totalWorkingDays <company.numberOfWorkingDays&& totalWorkingHrs< company.maxHrsInMonth)
+            while (totalEmpHour <= company.maxHrsInMonth && totalWorkingDays < company.numberOfWorkingDays)
             {
                 totalWorkingDays++;
                 int empCheck = rdm.Next(3);
                 switch (empCheck)
                 {
-                    case 1:
+                    case IS_FULL_TIME:
                         empHour = 8;
                         break;
-                    case 2:
+                    case IS_PART_TIME:
                         empHour = 4;
                         break;
                     default:
                         empHour = 0;
                         break;
                 }
-                if (company.maxHrsInMonth > totalEmpHour)
-                {
-                    totalEmpHour += empHour;
-                    empWage = empHour * company.empRatePerHrs;
-                    totalEmpWage += empWage;
-                }
+                totalEmpHour += empHour;
+                dailyEmpWage = empHour * company.empRatePerHrs;
+                Console.Write(dailyEmpWage+" ");
             }
-            employeeModels.CompanyName =company.companyName;
-            employeeModels.TotalWorkingDays= totalWorkingDays;
-            employeeModels.TotalEmpWage = totalEmpWage;
-            employeeModels.TotalEmpHour = totalEmpHour;
-            return employeeModels;
-        }
-        public void PrintEmployeeDetails(EmployeeModel empDetails)
-        {
-            Console.WriteLine("+++++++++++++=================+++++++++++++");
-            Console.WriteLine("Company Name : " + empDetails.CompanyName);
-            Console.WriteLine("Total Working Days: " + empDetails.TotalWorkingDays);
-            Console.WriteLine("Total Working Hours: " + empDetails.TotalEmpHour);
-            Console.WriteLine("Total Employee Wage : " + empDetails.TotalEmpWage);
+            totalEmpWage = totalEmpHour * company.empRatePerHrs;
+            Console.WriteLine("Daily Wage \nCompany Name :- " + company.companyName + " ,Total Emp Hrs " + totalEmpHour + " TotoEmpWage, " + totalEmpWage);
+            return totalEmpWage;
         }
     }
 }
